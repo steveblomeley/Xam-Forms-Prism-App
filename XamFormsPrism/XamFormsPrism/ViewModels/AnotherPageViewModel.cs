@@ -3,14 +3,15 @@ using Prism.Mvvm;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Prism.Navigation;
+using Xamarin.Forms;
 using XamFormsPrism.Services;
 
 namespace XamFormsPrism.ViewModels
 {
 	public class AnotherPageViewModel : ViewModelBase
 	{
-        public ICommand GoBackCommand { get; }
-        public ICommand GetDataCommand { get; }
+        public DelegateCommand GoBackCommand { get; }
+        public DelegateCommand GetDataCommand { get; }
         private readonly IDataService _dataService;
 
         public AnotherPageViewModel(INavigationService navigationService, IDataService dataService) : base (navigationService)
@@ -30,14 +31,17 @@ namespace XamFormsPrism.ViewModels
         }
 
 	    private bool _isBusy;
-
 	    public bool IsBusy
 	    {
-            get => _isBusy;
-	        set => SetProperty(ref _isBusy, value);
+	        get => _isBusy;
+	        set {
+                SetProperty(ref _isBusy, value);
+	            GoBackCommand.RaiseCanExecuteChanged();
+	            GetDataCommand.RaiseCanExecuteChanged();
+	        }
 	    }
 
-        private async Task GoBack()
+	    private async Task GoBack()
 	    {
 	        var anotherPageParams = new NavigationParameters
 	        {
