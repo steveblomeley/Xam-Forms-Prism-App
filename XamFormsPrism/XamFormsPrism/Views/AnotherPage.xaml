@@ -5,9 +5,16 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="XamFormsPrism.Views.AnotherPage">
     <StackLayout Orientation="Vertical" BackgroundColor="Goldenrod">
+        <ActivityIndicator
+            VerticalOptions="CenterAndExpand" 
+            IsRunning="{Binding IsBusy}" />
         <Label 
             VerticalOptions="CenterAndExpand" 
-            Text="{Binding Title}" />
+            Text="{Binding NewPageTitle}" />
+        <Button 
+            VerticalOptions="CenterAndExpand" 
+            Text="Get Data" 
+            Command="{Binding GetDataCommand}" />
         <Button 
             VerticalOptions="End" 
             Text="Go Back" 

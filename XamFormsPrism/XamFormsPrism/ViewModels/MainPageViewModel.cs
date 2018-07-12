@@ -39,7 +39,6 @@ namespace XamFormsPrism.ViewModels
                     Title = paramString;
                 }
             }
-
         }
     }
 }

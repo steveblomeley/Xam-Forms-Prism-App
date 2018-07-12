@@ -10,25 +10,49 @@ namespace XamFormsPrism.ViewModels
 	public class AnotherPageViewModel : ViewModelBase
 	{
         public ICommand GoBackCommand { get; }
-        private IDataService _dataService;
+        public ICommand GetDataCommand { get; }
+        private readonly IDataService _dataService;
 
         public AnotherPageViewModel(INavigationService navigationService, IDataService dataService) : base (navigationService)
         {
             _dataService = dataService;
-            Title = "Another Page";
-            GoBackCommand = new DelegateCommand(async () => await GoBack());
+            NewPageTitle = "Default Title";
+
+            GoBackCommand = new DelegateCommand(async () => await GoBack(), () => !IsBusy);
+            GetDataCommand = new DelegateCommand(async () => await GetData(), () => !IsBusy);
         }
 
-	    private async Task GoBack()
+	    private string _newPageTitle;
+	    public string NewPageTitle
 	    {
-	        var newPageTitle = _dataService.GetData();
+	        get => _newPageTitle;
+            set => SetProperty(ref _newPageTitle, value);
+        }
 
+	    private bool _isBusy;
+
+	    public bool IsBusy
+	    {
+            get => _isBusy;
+	        set => SetProperty(ref _isBusy, value);
+	    }
+
+        private async Task GoBack()
+	    {
 	        var anotherPageParams = new NavigationParameters
 	        {
-	            {"AnotherParameter", newPageTitle}
+	            {"AnotherParameter", NewPageTitle}
 	        };
 
 	        await NavigationService.GoBackAsync(anotherPageParams);
+	    }
+
+	    private async Task GetData()
+	    {
+	        IsBusy = true;
+	        await Task.Delay(5000);
+            IsBusy = false;
+	        NewPageTitle = _dataService.GetData();
 	    }
 
         public override void OnNavigatingTo(NavigationParameters parameters)
