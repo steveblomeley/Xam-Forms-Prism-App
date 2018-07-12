@@ -5,6 +5,7 @@ using XamFormsPrism.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Prism.DryIoc;
+using XamFormsPrism.Services;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace XamFormsPrism
@@ -33,6 +34,8 @@ namespace XamFormsPrism
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage>();
             containerRegistry.RegisterForNavigation<AnotherPage>();
+
+            containerRegistry.Register<IDataService, DataService>();
         }
     }
 }

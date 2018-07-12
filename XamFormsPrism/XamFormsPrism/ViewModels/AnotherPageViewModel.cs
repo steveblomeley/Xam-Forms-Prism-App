@@ -3,24 +3,29 @@ using Prism.Mvvm;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Prism.Navigation;
+using XamFormsPrism.Services;
 
 namespace XamFormsPrism.ViewModels
 {
 	public class AnotherPageViewModel : ViewModelBase
 	{
         public ICommand GoBackCommand { get; }
+        private IDataService _dataService;
 
-        public AnotherPageViewModel(INavigationService navigationService) : base (navigationService)
+        public AnotherPageViewModel(INavigationService navigationService, IDataService dataService) : base (navigationService)
         {
+            _dataService = dataService;
             Title = "Another Page";
             GoBackCommand = new DelegateCommand(async () => await GoBack());
         }
 
 	    private async Task GoBack()
 	    {
+	        var newPageTitle = _dataService.GetData();
+
 	        var anotherPageParams = new NavigationParameters
 	        {
-	            {"AnotherParameter", "New Page Title"}
+	            {"AnotherParameter", newPageTitle}
 	        };
 
 	        await NavigationService.GoBackAsync(anotherPageParams);
