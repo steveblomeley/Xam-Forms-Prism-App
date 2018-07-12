@@ -1,9 +1,6 @@
 ﻿using Prism.Commands;
-using Prism.Mvvm;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using Prism.Navigation;
-using Xamarin.Forms;
 using XamFormsPrism.Services;
 
 namespace XamFormsPrism.ViewModels
@@ -18,7 +15,7 @@ namespace XamFormsPrism.ViewModels
         {
             _dataService = dataService;
             NewPageTitle = "Default Title";
-
+            
             GoBackCommand = new DelegateCommand(async () => await GoBack(), () => !IsBusy);
             GetDataCommand = new DelegateCommand(async () => await GetData(), () => !IsBusy);
         }
