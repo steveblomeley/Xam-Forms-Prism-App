@@ -15,16 +15,31 @@ namespace XamFormsPrism.ViewModels
         public MainPageViewModel(INavigationService navigationService) 
             : base (navigationService)
         {
-            Title = "Main Page";
+            Title = "Welcome to Xamarin Forms and Prism!";
             GoToNextPageCommand = new DelegateCommand(async () => await GoToNextPage());
         }
 
-        private INavigationService _navigationService;
         public ICommand GoToNextPageCommand { get; }
 
         private async Task GoToNextPage()
         {
-            await NavigationService.NavigateAsync("AnotherPage");
+            var anotherPageParams = new NavigationParameters();
+            anotherPageParams.Add("AnotherParameter", "New Page Title");
+
+            await NavigationService.NavigateAsync("AnotherPage", anotherPageParams);
+        }
+
+        public override void OnNavigatingTo(NavigationParameters parameters)
+        {
+            base.OnNavigatingTo(parameters);
+            if (parameters.TryGetValue<object>("AnotherParameter", out var anotherParam))
+            {
+                if (anotherParam is string paramString)
+                {
+                    Title = paramString;
+                }
+            }
+
         }
     }
 }
