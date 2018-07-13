@@ -4,6 +4,7 @@ using Prism.Commands;
 using Prism.Navigation;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using XamFormsPrism.Constants;
 using XamFormsPrism.Helpers;
 using XamFormsPrism.Models;
 using XamFormsPrism.Services;
@@ -36,7 +37,7 @@ namespace XamFormsPrism.ViewModels
         {
             var anotherPageParams = new NavigationParameters
             {
-                {"AnotherParameter", "New Page Title"}
+                {AnotherPage.AnotherParameter, "New Page Title"}
             };
 
             await NavigationService.NavigateAsync("AnotherPage", anotherPageParams);
@@ -46,7 +47,7 @@ namespace XamFormsPrism.ViewModels
         {
             var contactDetailsPageParameters = new NavigationParameters
             {
-                {"Contact", contact}
+                {ContactDetailsPage.Contact, contact}
             };
 
             await NavigationService.NavigateAsync("ContactDetailsPage", contactDetailsPageParameters);
@@ -56,7 +57,7 @@ namespace XamFormsPrism.ViewModels
         {
             base.OnNavigatingTo(parameters);
 
-            if (parameters.TryGetParam<string>("AnotherParameter", out var paramString))
+            if (parameters.TryGetParam<string>(MainPage.AnotherParameter, out var paramString))
             { 
                 Title = paramString;
             }

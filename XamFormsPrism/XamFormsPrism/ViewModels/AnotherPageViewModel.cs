@@ -1,6 +1,7 @@
 ﻿using Prism.Commands;
 using System.Threading.Tasks;
 using Prism.Navigation;
+using XamFormsPrism.Constants;
 using XamFormsPrism.Helpers;
 using XamFormsPrism.Services;
 
@@ -48,7 +49,7 @@ namespace XamFormsPrism.ViewModels
         {
             var anotherPageParams = new NavigationParameters
             {
-                {"AnotherParameter", NewPageTitle}
+                {MainPage.AnotherParameter, NewPageTitle}
             };
 
             await NavigationService.GoBackAsync(anotherPageParams);
@@ -66,7 +67,7 @@ namespace XamFormsPrism.ViewModels
         {
             base.OnNavigatingTo(parameters);
 
-            if (parameters.TryGetParam<string>("AnotherParameter", out var paramString))
+            if (parameters.TryGetParam<string>(AnotherPage.AnotherParameter, out var paramString))
             {
                 Title = paramString;
             }

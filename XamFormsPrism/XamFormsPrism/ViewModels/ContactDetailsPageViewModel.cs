@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using Prism.Commands;
 using Prism.Navigation;
+using XamFormsPrism.Constants;
 using XamFormsPrism.Helpers;
 using XamFormsPrism.Models;
 
@@ -28,7 +29,7 @@ namespace XamFormsPrism.ViewModels
         {
             base.OnNavigatingTo(parameters);
 
-            if (parameters.TryGetParam<Contact>("Contact", out var contact))
+            if (parameters.TryGetParam<Contact>(ContactDetailsPage.Contact, out var contact))
             {
                 Contact = contact;
             }
