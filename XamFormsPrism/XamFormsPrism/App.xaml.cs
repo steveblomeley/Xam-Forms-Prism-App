@@ -33,6 +33,7 @@ namespace XamFormsPrism
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage>();
             containerRegistry.RegisterForNavigation<AnotherPage>();
+            containerRegistry.RegisterForNavigation<ContactDetailsPage>();
 
             containerRegistry.Register<IDataService, DataService>();
             containerRegistry.Register<IContactService, ContactService>();

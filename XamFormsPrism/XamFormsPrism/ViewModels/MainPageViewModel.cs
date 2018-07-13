@@ -46,8 +46,12 @@ namespace XamFormsPrism.ViewModels
 
         private async Task ShowContactDetails(Contact contact)
         {
-            await _dialogService.
-                DisplayAlertAsync("Contact Tapped", $"You tapped contact #{contact.Id}", "OK", "Cancel");
+            var contactDetailsPageParameters = new NavigationParameters
+            {
+                {"Contact", contact}
+            };
+
+            await NavigationService.NavigateAsync("ContactDetailsPage", contactDetailsPageParameters);
         }
 
         public override void OnNavigatingTo(NavigationParameters parameters)
