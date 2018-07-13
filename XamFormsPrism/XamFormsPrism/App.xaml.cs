@@ -1,6 +1,5 @@
 ﻿using Prism;
 using Prism.Ioc;
-using XamFormsPrism.ViewModels;
 using XamFormsPrism.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -36,6 +35,7 @@ namespace XamFormsPrism
             containerRegistry.RegisterForNavigation<AnotherPage>();
 
             containerRegistry.Register<IDataService, DataService>();
+            containerRegistry.Register<IContactService, ContactService>();
         }
     }
 }

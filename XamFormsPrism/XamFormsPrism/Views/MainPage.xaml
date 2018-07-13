@@ -35,7 +35,6 @@
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
-
         </ListView>
 
     </StackLayout>
