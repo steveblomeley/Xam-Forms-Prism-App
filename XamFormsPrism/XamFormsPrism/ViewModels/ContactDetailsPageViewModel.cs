@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using Prism.Commands;
 using Prism.Navigation;
+using XamFormsPrism.Helpers;
 using XamFormsPrism.Models;
 
 namespace XamFormsPrism.ViewModels
@@ -23,22 +24,19 @@ namespace XamFormsPrism.ViewModels
             GoBackCommand = new DelegateCommand(async () => await GoBack());
         }
 
-	    public override void OnNavigatingTo(NavigationParameters parameters)
-	    {
-	        base.OnNavigatingTo(parameters);
+        public override void OnNavigatingTo(NavigationParameters parameters)
+        {
+            base.OnNavigatingTo(parameters);
 
-	        if (parameters.TryGetValue<object>("Contact", out var contactParameter))
-	        {
-	            if (contactParameter is Contact contact)
-	            {
-	                Contact = contact;
-	            }
-	        }
-	    }
+            if (parameters.TryGetParam<Contact>("Contact", out var contact))
+            {
+                Contact = contact;
+            }
+        }
 
-	    private async Task GoBack()
-	    {
-	        await NavigationService.GoBackAsync();
-	    }
-	}
+        private async Task GoBack()
+        {
+            await NavigationService.GoBackAsync();
+        }
+    }
 }

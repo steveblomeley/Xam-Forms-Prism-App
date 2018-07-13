@@ -4,7 +4,7 @@ using Prism.Commands;
 using Prism.Navigation;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Prism.Services;
+using XamFormsPrism.Helpers;
 using XamFormsPrism.Models;
 using XamFormsPrism.Services;
 
@@ -18,13 +18,11 @@ namespace XamFormsPrism.ViewModels
         public ICommand ShowContactDetailsCommand { get; }
 
         private readonly IContactService _contactService;
-        private readonly IPageDialogService _dialogService;
 
-        public MainPageViewModel(INavigationService navigationService, IContactService contactService, IPageDialogService dialogService) 
-            : base (navigationService)
+        public MainPageViewModel(INavigationService navigationService, IContactService contactService)
+            : base(navigationService)
         {
             _contactService = contactService;
-            _dialogService = dialogService;
 
             Title = "Welcome to Xamarin Forms and Prism!";
 
@@ -57,12 +55,10 @@ namespace XamFormsPrism.ViewModels
         public override void OnNavigatingTo(NavigationParameters parameters)
         {
             base.OnNavigatingTo(parameters);
-            if (parameters.TryGetValue<object>("AnotherParameter", out var anotherParam))
-            {
-                if (anotherParam is string paramString)
-                {
-                    Title = paramString;
-                }
+
+            if (parameters.TryGetParam<string>("AnotherParameter", out var paramString))
+            { 
+                Title = paramString;
             }
 
             if (!Contacts.Any())
@@ -73,7 +69,7 @@ namespace XamFormsPrism.ViewModels
                     //TODO: opportunity to use enhanced observable collection from MVVM Helpers package?
                     Contacts.Add(contact);
                 }
-            }
+}
         }
     }
 }

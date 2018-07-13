@@ -2,10 +2,13 @@
 <prism:PrismApplication xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.DryIoc;assembly=Prism.DryIoc.Forms"
+             xmlns:xamFormsPrism="clr-namespace:XamFormsPrism;assembly=XamFormsPrism"
              x:Class="XamFormsPrism.App">
-	<Application.Resources>
 
-		<!-- Application resource dictionary -->
+    <Application.Resources>
+        <ResourceDictionary>
+            <xamFormsPrism:ItemTappedEventArgsToItemConverter x:Key="TappedItemConverter" />
+        </ResourceDictionary>
+    </Application.Resources>
 
-	</Application.Resources>
 </prism:PrismApplication>
