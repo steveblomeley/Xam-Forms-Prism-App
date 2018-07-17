@@ -1,9 +1,11 @@
 ﻿using Prism;
+using Unity;
 using Prism.Ioc;
 using XamFormsPrism.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using Prism.DryIoc;
+using Prism.Unity;
+using Unity.Injection;
 using XamFormsPrism.Services;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
@@ -35,8 +37,18 @@ namespace XamFormsPrism
             containerRegistry.RegisterForNavigation<AnotherPage>();
             containerRegistry.RegisterForNavigation<ContactDetailsPage>();
 
-            containerRegistry.Register<IDataService, DataService>();
-            containerRegistry.Register<IContactService, ContactService>();
+            var ctr = containerRegistry.GetContainer();
+
+            ctr.RegisterType<IDataService, DataService>();
+            ctr.RegisterType<DataService>(
+                new InjectionConstructor("Injected String"));
+
+            //dryIoc code to inject string as parameter - doesn't appear to work though ...
+            //ctr.Register<IDataService, DataService>();
+            //ctr.Register<DataService>(made: Parameters.Of.Type<string>(serviceKey: "injectedString"));
+            //ctr.RegisterInstance("Injected Fragment", serviceKey: "injectedString");
+
+            ctr.RegisterType<IContactService, ContactService>();
         }
     }
 }

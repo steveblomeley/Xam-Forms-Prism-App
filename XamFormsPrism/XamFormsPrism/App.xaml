@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<prism:PrismApplication xmlns="http://xamarin.com/schemas/2014/forms"
+<unity:PrismApplication xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:prism="clr-namespace:Prism.DryIoc;assembly=Prism.DryIoc.Forms"
              xmlns:xamFormsPrism="clr-namespace:XamFormsPrism;assembly=XamFormsPrism"
+             xmlns:unity="clr-namespace:Prism.Unity;assembly=Prism.Unity.Forms"
              x:Class="XamFormsPrism.App">
 
     <Application.Resources>
@@ -11,4 +11,4 @@
         </ResourceDictionary>
     </Application.Resources>
 
-</prism:PrismApplication>
+</unity:PrismApplication>
