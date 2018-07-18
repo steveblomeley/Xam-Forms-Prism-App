@@ -39,9 +39,9 @@ namespace XamFormsPrism
 
             var ctr = containerRegistry.GetContainer();
 
-            ctr.RegisterType<IDataService, DataService>();
-            ctr.RegisterType<DataService>(
-                new InjectionConstructor("Injected String"));
+            ctr.RegisterType<IDataService, DataService>(
+                new InjectionConstructor(
+                    new ResolvedParameter<IPlatformSpecificService>(), "injected string"));
 
             //dryIoc code to inject string as parameter - doesn't appear to work though ...
             //ctr.Register<IDataService, DataService>();

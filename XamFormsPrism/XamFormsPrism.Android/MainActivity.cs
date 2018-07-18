@@ -3,6 +3,7 @@ using Android.Content.PM;
 using Android.OS;
 using Prism;
 using Prism.Ioc;
+using XamFormsPrism.Services;
 
 namespace XamFormsPrism.Droid
 {
@@ -25,8 +26,7 @@ namespace XamFormsPrism.Droid
     {
         public void RegisterTypes(IContainerRegistry container)
         {
-            // Register any platform specific implementations
+            container.Register<IPlatformSpecificService,AndroidService>();
         }
     }
 }
-
